@@ -32,8 +32,8 @@ const questions = [
 qTotalEl.textContent = questions.length;
 
 // RANDOM BACKGROUND
-document.addEventListener("DOMContentLoaded", () => {
-    // RANDOM BACKGROUND
+// RANDOM BACKGROUND for ALL PAGES
+(function() {
     function randomColor() {
         const h1 = Math.floor(Math.random() * 360);
         const h2 = (h1 + Math.floor(60 + Math.random() * 140)) % 360;
@@ -44,16 +44,17 @@ document.addEventListener("DOMContentLoaded", () => {
         document.body.style.background = randomColor();
     }
 
-    // Apply background on load
-    applyRandomBackground();
+    // Apply on load
+    window.addEventListener("load", applyRandomBackground);
 
-    // Apply background on window resize (debounced)
+    // Apply on resize (debounced)
     let resizeTimeout;
     window.addEventListener("resize", () => {
         clearTimeout(resizeTimeout);
         resizeTimeout = setTimeout(applyRandomBackground, 200);
     });
-});
+})();
+
 
 
 // LOAD QUESTION
