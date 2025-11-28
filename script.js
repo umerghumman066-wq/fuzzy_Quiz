@@ -40,19 +40,21 @@ document.addEventListener("DOMContentLoaded", () => {
         return `linear-gradient(135deg, hsl(${h1} 70% 45%), hsl(${h2} 70% 45%))`;
     }
 
-function applyRandomBackground() {
-    document.body.style.background = randomColor();
-}
+    function applyRandomBackground() {
+        document.body.style.background = randomColor();
+    }
 
-// Apply background on load
-applyRandomBackground();
+    // Apply background on load
+    applyRandomBackground();
 
-// Apply background on window resize (debounced)
-let resizeTimeout;
-window.addEventListener("resize", () => {
-    clearTimeout(resizeTimeout);
-    resizeTimeout = setTimeout(applyRandomBackground, 200);
+    // Apply background on window resize (debounced)
+    let resizeTimeout;
+    window.addEventListener("resize", () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(applyRandomBackground, 200);
+    });
 });
+
 
 // LOAD QUESTION
 function loadQuestion() {
