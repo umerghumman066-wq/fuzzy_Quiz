@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Web Quiz App</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="card">
+
+<!-- START SCREEN -->
+<section id="welcome-screen" class="screen">
+    <h1>Web Quiz App</h1>
+    <p>Click Start to begin!</p>
+    <button class="btn white" id="start-btn">Start Quiz</button>
+    <p class="small" style="margin-top:12px">Tip: resize window to change background color.</p>
+</section>
+
+<!-- QUIZ SCREEN -->
+<section id="quiz-screen" class="screen hidden">
+    <div class="top-info">
+        <span>Question <span id="q-index">1</span> / <span id="q-total">5</span></span>
+        <span>Score: <span id="live-score">0</span></span>
+    </div>
+
+    <h2 id="question-text"></h2>
+    <div id="options-container"></div>
+    <p id="feedback"></p>
+
+    <div class="controls">
+        <button id="next-btn" class="btn white hidden">Next</button>
+        <button id="quit-btn" class="btn outline">Quit</button>
+    </div>
+</section>
+
+<!-- RESULT SCREEN -->
+<section id="result-screen" class="screen hidden">
+    <h1>Your Result</h1>
+    <p class="big" id="final-score"></p>
+    <p id="final-message"></p>
+
+    <div class="controls">
+        <button class="btn white" id="restart-btn">Play Again</button>
+        <a href="index.html" class="btn outline">Home</a>
+    </div>
+</section>
+
+</main>
+<script src="script.js"></script>
+</body>
+</html>
