@@ -32,11 +32,13 @@ const questions = [
 qTotalEl.textContent = questions.length;
 
 // RANDOM BACKGROUND
-function randomColor(){
-    const h1 = Math.floor(Math.random() * 360);
-    const h2 = (h1 + Math.floor(60 + Math.random() * 140)) % 360;
-    return `linear-gradient(135deg, hsl(${h1} 70% 45%), hsl(${h2} 70% 45%))`;
-}
+document.addEventListener("DOMContentLoaded", () => {
+    // RANDOM BACKGROUND
+    function randomColor() {
+        const h1 = Math.floor(Math.random() * 360);
+        const h2 = (h1 + Math.floor(60 + Math.random() * 140)) % 360;
+        return `linear-gradient(135deg, hsl(${h1} 70% 45%), hsl(${h2} 70% 45%))`;
+    }
 
 function applyRandomBackground() {
     document.body.style.background = randomColor();
