@@ -1,3 +1,26 @@
+// RANDOM BACKGROUND
+// RANDOM BACKGROUND for ALL PAGES
+(function() {
+    function randomColor() {
+        const h1 = Math.floor(Math.random() * 360);
+        const h2 = (h1 + Math.floor(60 + Math.random() * 140)) % 360;
+        return `linear-gradient(135deg, hsl(${h1} 70% 45%), hsl(${h2} 70% 45%))`;
+    }
+
+    function applyRandomBackground() {
+        document.body.style.background = randomColor();
+    }
+
+    // Apply on load
+    window.addEventListener("load", applyRandomBackground);
+
+    // Apply on resize (debounced)
+    let resizeTimeout;
+    window.addEventListener("resize", () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(applyRandomBackground, 200);
+    });
+})();
 // DOM ELEMENTS
 const startBtn = document.getElementById('start-btn');
 const welcomeScreen = document.getElementById('welcome-screen');
@@ -30,31 +53,6 @@ const questions = [
 ];
 
 qTotalEl.textContent = questions.length;
-
-// RANDOM BACKGROUND
-// RANDOM BACKGROUND for ALL PAGES
-(function() {
-    function randomColor() {
-        const h1 = Math.floor(Math.random() * 360);
-        const h2 = (h1 + Math.floor(60 + Math.random() * 140)) % 360;
-        return `linear-gradient(135deg, hsl(${h1} 70% 45%), hsl(${h2} 70% 45%))`;
-    }
-
-    function applyRandomBackground() {
-        document.body.style.background = randomColor();
-    }
-
-    // Apply on load
-    window.addEventListener("load", applyRandomBackground);
-
-    // Apply on resize (debounced)
-    let resizeTimeout;
-    window.addEventListener("resize", () => {
-        clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(applyRandomBackground, 200);
-    });
-})();
-
 
 
 // LOAD QUESTION
