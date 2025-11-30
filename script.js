@@ -1,4 +1,3 @@
-
 // DOM ELEMENTS
 const startBtn = document.getElementById('start-btn');
 const welcomeScreen = document.getElementById('welcome-screen');
@@ -15,78 +14,95 @@ const liveScoreEl = document.getElementById('live-score');
 const finalScoreEl = document.getElementById('final-score');
 const finalMsg = document.getElementById('final-message');
 
-let index = 0, score = 0;
+let index = 0;  let score = 0;  
 
 // QUESTIONS
 const questions = [
-    { q:"What does HTML stand for?", 
-     o:["HyperText Markup Language","Home Tool Markup Language",
-        "Hyperlinks and Text Markup","HyperText Markdown Language"], a:0 },
-    { q:"CSS is used for styling. (T/F)", o:["True","False"], a:0 },
-    { q:"Which is a JS framework?", o:["Laravel","React","Django","Tailwind"], a:1 },
-    { q:"Which attribute links CSS file?", o:["src","href","link","rel"], a:1 },
-    { q:"<canvas> is used for graphics. (T/F)", o:["True","False"], a:0 }
+  { q: "What does HTML stand for?", 
+    o: ["HyperText Markup Language", "Home Tool Markup Language", 
+        "Hyperlinks and Text Markup", "HyperText Markdown Language"],
+         a: 0 },
+  { q: "CSS is used for styling. (T/F)", o: ["True", "False"], a: 0 },
+  { q: "Which is a JS framework?", 
+    o: ["Laravel", "React", "Django", "Tailwind"],  a: 1 },
+  { q: "Which attribute links CSS file?", o: ["src", "href", "link", "rel"], a: 1 },
+  { q: "<canvas> is used for graphics. (T/F)", o: ["True", "False"], a: 0 }
 ];
-
+// Set total questions in UI
 qTotalEl.textContent = questions.length;
 // LOAD QUESTION
 function loadQuestion() {
-    const q = questions[index];
-    qText.textContent = q.q;
-    qIndexEl.textContent = index + 1;
-    optionsContainer.innerHTML = "";
-    feedback.textContent = "";
-    nextBtn.classList.add("hidden");
-    q.o.forEach((opt, i) => {
-        const btn = document.createElement("button");
-        btn.textContent = opt;
-        btn.onclick = () => selectOption(i, btn);
-        optionsContainer.appendChild(btn);
-    });
+  const q = questions[index];
+  qText.textContent = q.q;                   // Display question
+  qIndexEl.textContent = index + 1;          // Display current question number
+  optionsContainer.innerHTML = "";           // Clear previous options
+  feedback.textContent = "";                 // Clear previous feedback
+
+  // Create option buttons
+  q.o.forEach((opt, i) => {
+    const btn = document.createElement("button");
+    btn.textContent = opt;
+    btn.onclick = () => selectOption(i, btn);
+    optionsContainer.appendChild(btn);
+  });
 }
+
 // SELECT OPTION
 function selectOption(selected, btn) {
-    const correct = questions[index].a;
-    [...optionsContainer.children].forEach(b => b.disabled = true);
-    if(selected === correct){
-        btn.classList.add("correct");
-        score++;
-        liveScoreEl.textContent = score;
-        feedback.textContent = "Correct!";
+  const correct = questions[index].a;
+  
+  // Disable all buttons after selection
+  [...optionsContainer.children].forEach(b => b.disabled = true);
+
+  if (selected === correct) {
+    btn.classList.add("correct");
+    score++;
+    liveScoreEl.textContent = score;
+    feedback.textContent = "Correct!";
+  } else {
+    btn.classList.add("wrong");
+    optionsContainer.children[correct].classList.add("correct");
+    feedback.textContent = "Wrong!";
+  }
+
+  // Move to next question after 1 second
+  setTimeout(() => {
+    if (index < questions.length - 1) {
+      index++;
+      loadQuestion();
     } else {
-        btn.classList.add("wrong");
-        optionsContainer.children[correct].classList.add("correct");
-        feedback.textContent = "Wrong!";
+      showResult();
     }
-    setTimeout(() => {
-        if(index < questions.length - 1){
-            index++;
-            loadQuestion();
-        } else {
-            showResult();
-        }
-    }, 1000);
+  }, 1000);
 }
+
+// SHOW RESULT
 function showResult() {
-    quizScreen.classList.add("hidden");
-    resultScreen.classList.remove("hidden");
-    finalScoreEl.textContent = `${score} / ${questions.length}`;
-    finalMsg.textContent =
-        score === questions.length ? "Perfect Score!" :
-        score >= Math.ceil(questions.length*0.6) ? "Great Job!" : "Try Again!";
+  quizScreen.classList.add("hidden");
+  resultScreen.classList.remove("hidden");
+  finalScoreEl.textContent = `${score} / ${questions.length}`;
+  finalMsg.textContent = score === questions.length ? "Perfect Score!" :
+                         score >= Math.ceil(questions.length * 0.6) ? "Great Job!" :
+                         "Try Again!";
 }
 
 // EVENT HANDLERS
 startBtn.onclick = () => {
-    welcomeScreen.classList.add("hidden");
-    quizScreen.classList.remove("hidden");
-    index = 0; score = 0; liveScoreEl.textContent = 0;
-    loadQuestion();
+  welcomeScreen.classList.add("hidden");
+  quizScreen.classList.remove("hidden");
+  index = 0;
+  score = 0;
+  liveScoreEl.textContent = 0;
+  loadQuestion();
 };
+
 quitBtn.onclick = showResult;
+
 restartBtn.onclick = () => {
-    resultScreen.classList.add("hidden");
-    quizScreen.classList.remove("hidden");
-    index = 0; score = 0; liveScoreEl.textContent = 0;
-    loadQuestion();
+  resultScreen.classList.add("hidden");
+  quizScreen.classList.remove("hidden");
+  index = 0;
+  score = 0;
+  liveScoreEl.textContent = 0;
+  loadQuestion();
 };
