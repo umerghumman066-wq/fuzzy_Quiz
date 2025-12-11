@@ -1,0 +1,44 @@
+
+
+
+<!DOCTYPE html>
+<html><head><title>Experiment 5: Exploring CSS Selectors</title> 
+    <style>
+        p {color: gray; font-style: italic;
+            border: 1px solid #ccc;padding: 5px;}
+        .highlight {background-color: yellow;
+            color: black;font-weight: bold; }
+        #main-heading {color: darkred;text-align: right;
+            border-bottom: 2px solid darkred; padding-bottom: 5px;}
+        .nav-links {background-color: #4CAF50; color: white;
+            font-size: 0.9em;font-weight: bold; }
+    </style></head>
+<body>
+    <h1 id="main-heading">Experiment 5: CSS Selectors (ID, Class, Type)</h1>
+    <hr>
+    <h2>Student Information</h2>
+    <p> Name:UMER FAROOQ<br>Registration ID:FA22-BCE-048</p>
+    <hr>
+    <h2>Lab Task 1: Demonstrate Type Selector</h2>
+    <p>This paragraph is styled using the **Type Selector** (the `p` selector). Notice that 
+        every paragraph on this page has the same light gray border and italic text.</p>
+    <hr>
+    <h2>Lab Task 2: Demonstrate Class Selector</h2>
+    <p class="highlight"> This paragraph is styled using the **Class Selector** (`.highlight`). 
+        It overrides someof the Type Selector styles and adds a yellow background and bold text. 
+        Multiple elements can use the same class.</p>
+    <p> This is a normal paragraph to show the difference.</p>
+    <hr>
+    <h2>Lab Task 3: Demonstrate ID Selector</h2>
+    <p>The main title above is styled using the **ID Selector** (`#main-heading`). This selector 
+        is meant for elements that are unique on the page.</p>
+    <hr>
+    <h2>Report Requirements and Instructions</h2>
+    <p>Experiment 5 requires the successful demonstration of the three core CSS selector types:</p>
+    <ol> <li>**Type Selector (Element Selector):** Styling all instances of a tag (e.g., `p`, `h1`).</li>
+        <li>**Class Selector:** Styling elements using the `class="[name]"` attribute.</li>
+        <li>**ID Selector:** Styling the unique element using the `id="[name]"` attribute.</li>
+    </ol>
+    <a class="nav-links" href="index.html">Go Back</a>
+</body>
+</html>
