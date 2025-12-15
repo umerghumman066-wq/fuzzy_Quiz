@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Web Technologies – Lab Tasks</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: #ffffff;
+            padding: 30px 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 25px;
+        }
+
+        button {
+            padding: 12px 28px;
+            font-size: 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            margin: 10px 0;
+            background-color: #6d28d9;
+            color: white;
+        }
+
+        button:hover {
+            background-color: #5b21b6;
+        }
+    </style>
+
+    <script>
+        // Task 1: Collect user details
+        function collectDetails() {
+            const userName = prompt("Please enter your name:");
+            const regId = prompt("Please enter your registration number:");
+
+            if (userName && regId) {
+                alert(
+                    "Student Information\n\n" +
+                    "Name: " + userName +
+                    "\nRegistration ID: " + regId
+                );
+            } else {
+                alert("Incomplete information provided.");
+            }
+        }
+
+        // Task 2: Perform arithmetic operations
+        function calculateNumbers() {
+            const firstValue = Number(prompt("Enter first number:"));
+            const secondValue = Number(prompt("Enter second number:"));
+
+            if (isNaN(firstValue) || isNaN(secondValue)) {
+                alert("Please enter valid numbers.");
+                return;
+            }
+
+            const result =
+                "Addition: " + (firstValue + secondValue) +
+                "\nSubtraction: " + (firstValue - secondValue) +
+                "\nMultiplication: " + (firstValue * secondValue) +
+                "\nDivision: " + (firstValue / secondValue) +
+                "\nIs first number greater? " + (firstValue > secondValue);
+
+            alert("Calculation Results\n\n" + result);
+        }
+    </script>
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>Web Technologies Lab Tasks</h2>
+
+        <button onclick="collectDetails()">
+            Task 1: Student Details
+        </button>
+
+        <br>
+
+        <button onclick="calculateNumbers()">
+            Task 2: Number Calculations
+        </button>
+    </div>
+
+</body>
+</html>
