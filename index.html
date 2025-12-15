@@ -3,194 +3,185 @@
 <head>
     <title>Web Technologies Lab Manual</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+
     <style>
-        /* Apply Inter font family and a smooth scrolling behavior */
         body {
             font-family: 'Inter', sans-serif;
         }
-        /* Custom scrollbar for aesthetics */
         body::-webkit-scrollbar {
             width: 8px;
         }
         body::-webkit-scrollbar-thumb {
-            background-color: #d946ef; /* fuchsia-500 */
+            background-color: #d946ef;
             border-radius: 4px;
         }
     </style>
 </head>
-<body class="bg-gray-950 min-h-screen text-gray-50 p-6 sm:p-12">
 
-    <!-- Main Content Container: Centered and responsive -->
-    <div class="max-w-6xl mx-auto py-8">
-        
-        <!-- Header Section -->
-        <header class="text-center mb-16">
-            <h1 class="text-5xl sm:text-7xl font-extrabold tracking-tight mb-4 text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-fuchsia-600">
+<body class="bg-gray-950 text-gray-100 min-h-screen px-6 py-10">
+
+    <!-- Main Container -->
+    <div class="max-w-7xl mx-auto">
+
+        <!-- Header -->
+        <header class="text-center mb-20">
+            <h1 class="text-5xl sm:text-7xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-fuchsia-600">
                 Web Technologies Lab Manual
             </h1>
-            <p class="text-xl text-gray-400 font-light mt-4">
-                Computer Engineering - Comsats Abbottabad
+            <p class="text-xl text-gray-400 mt-6">
+                Computer Engineering – COMSATS Abbottabad
             </p>
-            <p class="text-lg text-fuchsia-400 font-medium">
-                Umer Farooq - 048
+            <p class="text-lg text-fuchsia-400 font-semibold mt-2">
+                Umer Farooq – 048
             </p>
         </header>
 
-        <!-- Lab Tasks Tile Grid Container -->
-        <!-- Responsive Grid: 1 column on mobile, 2 on small screens, 3 on large screens -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            
-            <!-- Lab Entry Tile Template -->
+        <!-- Labs Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
 
-            <!-- Lab Task 1 -->
-            <div class="lab-tile bg-gray-800 p-6 rounded-2xl transition-all duration-300 transform hover:scale-[1.03] hover:shadow-fuchsia-500/50 shadow-xl border-t-4 border-fuchsia-600 hover:bg-gray-700/80">
-                <div class="flex items-center mb-4">
-                    <div class="text-5xl font-extrabold text-fuchsia-400">
-                        01
-                    </div>
-                    <div class="ml-4 flex-grow">
-                        <h3 class="text-2xl font-bold text-white leading-tight">Lab Task 1</h3>
-                    </div>
-                </div>
-                <p class="text-gray-300 text-base mb-6 h-12">Introduction to basic HTML structure and elements.</p>
-                <a href="lab1.html" class="w-full inline-block text-center py-3 px-6 rounded-xl font-bold bg-fuchsia-600 text-white hover:bg-fuchsia-500 transition-colors shadow-lg shadow-fuchsia-700/30">
-                    Explore Lab
-                </a>
+            <!-- Lab Card Template -->
+            <!-- Lab 1 -->
+            <div class="lab-card">
+                <div class="lab-no">01</div>
+                <h3 class="lab-title">Lab Task 1</h3>
+                <p class="lab-desc">Basic HTML structure and core elements.</p>
+                <a href="lab1.html" class="lab-btn">Open Lab</a>
             </div>
 
-            <!-- Lab Task 2 -->
-            <div class="lab-tile bg-gray-800 p-6 rounded-2xl transition-all duration-300 transform hover:scale-[1.03] hover:shadow-fuchsia-500/50 shadow-xl border-t-4 border-fuchsia-600 hover:bg-gray-700/80">
-                <div class="flex items-center mb-4">
-                    <div class="text-5xl font-extrabold text-fuchsia-400">
-                        02
-                    </div>
-                    <div class="ml-4 flex-grow">
-                        <h3 class="text-2xl font-bold text-white leading-tight">Lab Task 2</h3>
-                    </div>
-                </div>
-                <p class="text-gray-300 text-base mb-6 h-12">Working with tables, forms, and semantic HTML.</p>
-                <a href="lab2.html" class="w-full inline-block text-center py-3 px-6 rounded-xl font-bold bg-fuchsia-600 text-white hover:bg-fuchsia-500 transition-colors shadow-lg shadow-fuchsia-700/30">
-                    Explore Lab
-                </a>
+            <!-- Lab 2 -->
+            <div class="lab-card">
+                <div class="lab-no">02</div>
+                <h3 class="lab-title">Lab Task 2</h3>
+                <p class="lab-desc">Tables, forms, and semantic HTML.</p>
+                <a href="lab2.html" class="lab-btn">Open Lab</a>
             </div>
 
-            <!-- Lab Task 3 -->
-            <div class="lab-tile bg-gray-800 p-6 rounded-2xl transition-all duration-300 transform hover:scale-[1.03] hover:shadow-fuchsia-500/50 shadow-xl border-t-4 border-fuchsia-600 hover:bg-gray-700/80">
-                <div class="flex items-center mb-4">
-                    <div class="text-5xl font-extrabold text-fuchsia-400">
-                        03
-                    </div>
-                    <div class="ml-4 flex-grow">
-                        <h3 class="text-2xl font-bold text-white leading-tight">Lab Task 3</h3>
-                    </div>
-                </div>
-                <p class="text-gray-300 text-base mb-6 h-12">Introduction to CSS styling and basic selectors.</p>
-                <a href="lab3.html" class="w-full inline-block text-center py-3 px-6 rounded-xl font-bold bg-fuchsia-600 text-white hover:bg-fuchsia-500 transition-colors shadow-lg shadow-fuchsia-700/30">
-                    Explore Lab
-                </a>
-            </div>
-            
-            <!-- Lab Task 4 -->
-            <div class="lab-tile bg-gray-800 p-6 rounded-2xl transition-all duration-300 transform hover:scale-[1.03] hover:shadow-fuchsia-500/50 shadow-xl border-t-4 border-fuchsia-600 hover:bg-gray-700/80">
-                <div class="flex items-center mb-4">
-                    <div class="text-5xl font-extrabold text-fuchsia-400">
-                        04
-                    </div>
-                    <div class="ml-4 flex-grow">
-                        <h3 class="text-2xl font-bold text-white leading-tight">Lab Task 4</h3>
-                    </div>
-                </div>
-                <p class="text-gray-300 text-base mb-6 h-12">Implementing Flexbox and basic responsive design.</p>
-                <a href="lab4.html" class="w-full inline-block text-center py-3 px-6 rounded-xl font-bold bg-fuchsia-600 text-white hover:bg-fuchsia-500 transition-colors shadow-lg shadow-fuchsia-700/30">
-                    Explore Lab
-                </a>
+            <!-- Lab 3 -->
+            <div class="lab-card">
+                <div class="lab-no">03</div>
+                <h3 class="lab-title">Lab Task 3</h3>
+                <p class="lab-desc">CSS basics and selectors.</p>
+                <a href="lab3.html" class="lab-btn">Open Lab</a>
             </div>
 
-            <!-- Lab Task 5 -->
-            <div class="lab-tile bg-gray-800 p-6 rounded-2xl transition-all duration-300 transform hover:scale-[1.03] hover:shadow-fuchsia-500/50 shadow-xl border-t-4 border-fuchsia-600 hover:bg-gray-700/80">
-                <div class="flex items-center mb-4">
-                    <div class="text-5xl font-extrabold text-fuchsia-400">
-                        05
-                    </div>
-                    <div class="ml-4 flex-grow">
-                        <h3 class="text-2xl font-bold text-white leading-tight">Lab Task 5</h3>
-                    </div>
-                </div>
-                <p class="text-gray-300 text-base mb-6 h-12">Working with CSS Grid layouts and complex positioning.</p>
-                <a href="lab5.html" class="w-full inline-block text-center py-3 px-6 rounded-xl font-bold bg-fuchsia-600 text-white hover:bg-fuchsia-500 transition-colors shadow-lg shadow-fuchsia-700/30">
-                    Explore Lab
-                </a>
+            <!-- Lab 4 -->
+            <div class="lab-card">
+                <div class="lab-no">04</div>
+                <h3 class="lab-title">Lab Task 4</h3>
+                <p class="lab-desc">Flexbox and responsive layouts.</p>
+                <a href="lab4.html" class="lab-btn">Open Lab</a>
             </div>
-            
-            <!-- Lab Task 6 -->
-            <div class="lab-tile bg-gray-800 p-6 rounded-2xl transition-all duration-300 transform hover:scale-[1.03] hover:shadow-fuchsia-500/50 shadow-xl border-t-4 border-fuchsia-600 hover:bg-gray-700/80">
-                <div class="flex items-center mb-4">
-                    <div class="text-5xl font-extrabold text-fuchsia-400">
-                        06
-                    </div>
-                    <div class="ml-4 flex-grow">
-                        <h3 class="text-2xl font-bold text-white leading-tight">Lab 6</h3>
-                    </div>
-                </div>
-                <p class="text-gray-300 text-base mb-6 h-12">Basic JavaScript functions and DOM manipulation.</p>
-                <a href="lab6.html" class="w-full inline-block text-center py-3 px-6 rounded-xl font-bold bg-fuchsia-600 text-white hover:bg-fuchsia-500 transition-colors shadow-lg shadow-fuchsia-700/30">
-                    Explore Lab
-                </a>
+
+            <!-- Lab 5 -->
+            <div class="lab-card">
+                <div class="lab-no">05</div>
+                <h3 class="lab-title">Lab Task 5</h3>
+                <p class="lab-desc">CSS Grid and advanced positioning.</p>
+                <a href="lab5.html" class="lab-btn">Open Lab</a>
             </div>
-   <!-- Lab Task 7 -->
-            <div class="lab-tile bg-gray-800 p-6 rounded-2xl transition-all duration-300 transform hover:scale-[1.03] hover:shadow-fuchsia-500/50 shadow-xl border-t-4 border-fuchsia-600 hover:bg-gray-700/80">
-                <div class="flex items-center mb-4">
-                    <div class="text-5xl font-extrabold text-fuchsia-400">
-                        07
-                    </div>
-                    <div class="ml-4 flex-grow">
-                        <h3 class="text-2xl font-bold text-white leading-tight">Lab Task 5</h3>
-                    </div>
-                </div>
-                <p class="text-gray-300 text-base mb-6 h-12">Working with CSS Grid layouts and complex positioning.</p>
-                <a href="lab7.html" class="w-full inline-block text-center py-3 px-6 rounded-xl font-bold bg-fuchsia-600 text-white hover:bg-fuchsia-500 transition-colors shadow-lg shadow-fuchsia-700/30">
-                    Explore Lab
-                </a>
+
+            <!-- Lab 6 -->
+            <div class="lab-card">
+                <div class="lab-no">06</div>
+                <h3 class="lab-title">Lab Task 6</h3>
+                <p class="lab-desc">JavaScript basics and DOM manipulation.</p>
+                <a href="lab6.html" class="lab-btn">Open Lab</a>
             </div>
-               <!-- Lab Task 8 -->
-            <div class="lab-tile bg-gray-800 p-6 rounded-2xl transition-all duration-300 transform hover:scale-[1.03] hover:shadow-fuchsia-500/50 shadow-xl border-t-4 border-fuchsia-600 hover:bg-gray-700/80">
-                <div class="flex items-center mb-4">
-                    <div class="text-5xl font-extrabold text-fuchsia-400">
-                        08
-                    </div>
-                    <div class="ml-4 flex-grow">
-                        <h3 class="text-2xl font-bold text-white leading-tight">Lab Task 5</h3>
-                    </div>
-                </div>
-                <p class="text-gray-300 text-base mb-6 h-12">Working with CSS Grid layouts and complex positioning.</p>
-                <a href="lab5.html" class="w-full inline-block text-center py-3 px-6 rounded-xl font-bold bg-fuchsia-600 text-white hover:bg-fuchsia-500 transition-colors shadow-lg shadow-fuchsia-700/30">
-                    Explore Lab
-                </a>
+
+            <!-- Lab 7 -->
+            <div class="lab-card">
+                <div class="lab-no">07</div>
+                <h3 class="lab-title">Lab Task 7</h3>
+                <p class="lab-desc">JavaScript events and user interaction.</p>
+                <a href="lab7.html" class="lab-btn">Open Lab</a>
             </div>
-          <!-- Assignment 3 -->
-<div class="lab-tile bg-gray-800 p-6 rounded-2xl transition-all duration-300 transform hover:scale-[1.03] hover:shadow-fuchsia-500/50 shadow-xl border-t-4 border-fuchsia-600 hover:bg-gray-700/80">
-    <div class="flex items-center mb-4">
-        <div class="text-5xl font-extrabold text-fuchsia-400">
-            A3
-        </div>
-        <div class="ml-4 flex-grow">
-            <h3 class="text-2xl font-bold text-white leading-tight">Assignment 3</h3>
-        </div>
-    </div>
-    <p class="text-gray-300 text-base mb-6 h-12">
+
+            <!-- Lab 8 -->
+            <div class="lab-card">
+                <div class="lab-no">08</div>
+                <h3 class="lab-title">Lab Task 8</h3>
+                <p class="lab-desc">Responsive design with media queries.</p>
+                <a href="lab8.html" class="lab-btn">Open Lab</a>
+            </div>
+
+            <!-- Lab 9 -->
+            <div class="lab-card">
+                <div class="lab-no">09</div>
+                <h3 class="lab-title">Lab Task 9</h3>
+                <p class="lab-desc">Complete mini project integration.</p>
+                <a href="lab9.html" class="lab-btn">Open Lab</a>
+            </div>
+
+            <!-- Assignment 3 -->
+<div class="lab-card">
+    <div class="lab-no">A3</div>
+    <h3 class="lab-title">Assignment 3</h3>
+    <p class="lab-desc">
         Responsive Quiz Web App using HTML, CSS (Flexbox) & JavaScript.
     </p>
-    <a href="index2.html" class="w-full inline-block text-center py-3 px-6 rounded-xl font-bold bg-fuchsia-600 text-white hover:bg-fuchsia-500 transition-colors shadow-lg shadow-fuchsia-700/30">
-        Open Assignment
-    </a>
+    <a href="index2.html" class="lab-btn">Open Assignment</a>
 </div>
 
-
-
-
+        </div>
     </div>
+
+    <!-- Reusable Styles -->
+    <style>
+        .lab-card {
+            background: #1f2933;
+            padding: 1.75rem;
+            border-radius: 1.25rem;
+            border-top: 4px solid #d946ef;
+            box-shadow: 0 20px 25px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .lab-card:hover {
+            transform: scale(1.04);
+            background: rgba(31,41,51,0.85);
+            box-shadow: 0 0 30px rgba(217,70,239,0.4);
+        }
+
+        .lab-no {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #e879f9;
+        }
+
+        .lab-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-top: 0.5rem;
+        }
+
+        .lab-desc {
+            color: #d1d5db;
+            margin: 1rem 0 1.5rem;
+            flex-grow: 1;
+        }
+
+        .lab-btn {
+            text-align: center;
+            padding: 0.75rem;
+            border-radius: 0.75rem;
+            font-weight: 700;
+            background: #d946ef;
+            color: white;
+            transition: background 0.3s ease;
+        }
+
+        .lab-btn:hover {
+            background: #e879f9;
+        }
+    </style>
 
 </body>
 </html>
