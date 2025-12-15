@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Interactive Control Panel – Web Lab</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #e0e7ff, #f0f9ff);
+            padding: 40px;
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 30px;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 35px;
+        }
+
+        button {
+            padding: 11px 18px;
+            font-size: 16px;
+            border: none;
+            border-radius: 7px;
+            cursor: pointer;
+            background: #111827;
+            color: white;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #374151;
+        }
+
+        .object {
+            width: 120px;
+            height: 120px;
+            margin: 15px auto;
+            transition: 0.4s ease;
+        }
+
+        #square {
+            background: #fb7185;
+            border-radius: 10px;
+        }
+
+        #round {
+            background: #38bdf8;
+            border-radius: 50%;
+        }
+
+        .status-box {
+            margin-top: 25px;
+            padding: 12px;
+            font-size: 17px;
+            background: #ffffff;
+            border-radius: 8px;
+            display: inline-block;
+            min-width: 280px;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Modular Interactive Web Page</h1>
+
+    <!-- Buttons -->
+    <div class="controls">
+        <button onclick="handleAction('color')">Change Color</button>
+        <button onclick="handleAction('move')">Move Shape</button>
+        <button onclick="handleAction('resize')">Resize Shape</button>
+        <button onclick="handleAction('toggle')">Toggle Display</button>
+    </div>
+
+    <!-- Shapes -->
+    <div id="square" class="object"></div>
+    <div id="round" class="object"></div>
+
+    <!-- Status -->
+    <div id="statusText" class="status-box">
+        Status: Ready
+    </div>
+
+    <script>
+        // Utility to update status text
+        function setStatus(message) {
+            document.getElementById("statusText").innerText =
+                "Status: " + message;
+        }
+
+        // Action functions (callbacks)
+        function changeSquareColor() {
+            const square = document.getElementById("square");
+            square.style.backgroundColor =
+                "#" + Math.floor(Math.random() * 16777215).toString(16);
+            setStatus("Square color updated");
+        }
+
+        function moveRoundShape() {
+            const round = document.getElementById("round");
+            round.style.transform = "translateX(80px)";
+            setStatus("Round shape moved");
+        }
+
+        function resizeSquare() {
+            const square = document.getElementById("square");
+            const size = Math.floor(Math.random() * 140) + 80;
+            square.style.width = size + "px";
+            square.style.height = size + "px";
+            setStatus("Square resized");
+        }
+
+        function toggleObjects() {
+            const square = document.getElementById("square");
+            const round = document.getElementById("round");
+
+            const state = square.style.display === "none";
+
+            square.style.display = state ? "block" : "none";
+            round.style.display = state ? "block" : "none";
+
+            setStatus("Visibility toggled");
+        }
+
+        // Higher-order function
+        function executeTask(label, actionFn) {
+            console.log("Action:", label);
+            actionFn();
+        }
+
+        // Select task using switch
+        function handleAction(type) {
+            switch (type) {
+                case "color":
+                    executeTask("Change Color", changeSquareColor);
+                    break;
+
+                case "move":
+                    executeTask("Move Shape", moveRoundShape);
+                    break;
+
+                case "resize":
+                    executeTask("Resize Shape", resizeSquare);
+                    break;
+
+                case "toggle":
+                    executeTask("Toggle Display", toggleObjects);
+                    break;
+
+                default:
+                    setStatus("Invalid action");
+            }
+        }
+    </script>
+
+</body>
+</html>
