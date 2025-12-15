@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab 10 – Student Record Manager</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+            padding: 20px;
+        }
+
+        .app {
+            max-width: 1100px;
+            margin: auto;
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .notice {
+            text-align: center;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+
+        .notice.info { background: #e0f2fe; color: #075985; }
+        .notice.success { background: #dcfce7; color: #166534; }
+        .notice.error { background: #fee2e2; color: #991b1b; }
+
+        .form-box {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 6px;
+            margin-bottom: 25px;
+            border: 1px solid #e5e7eb;
+        }
+
+        .row {
+            margin-bottom: 15px;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid #d1d5db;
+        }
+
+        .btns {
+            margin-top: 15px;
+        }
+
+        button {
+            padding: 9px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        .btn-add { background: #22c55e; color: white; }
+        .btn-update { background: #facc15; }
+        .btn-cancel { background: #6b7280; color: white; }
+        .btn-danger { background: #ef4444; color: white; }
+
+        .summary {
+            display: flex;
+            justify-content: space-around;
+            background: #f1f5f9;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+
+        .summary div {
+            text-align: center;
+        }
+
+        .summary span {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .tools {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: #111827;
+            color: white;
+            padding: 12px;
+        }
+
+        td {
+            padding: 12px;
+            border: 1px solid #e5e7eb;
+        }
+
+        tr:nth-child(even) {
+            background: #f9fafb;
+        }
+
+        .topper {
+            background: #fef3c7 !important;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="app">
+
+    <h1>Lab 10 – Student Record Management</h1>
+
+    <div id="alertBox" class="notice info">
+        Start by adding a student record.
+    </div>
+
+    <!-- Form -->
+    <div class="form-box">
+        <h3>Student Details</h3>
+
+        <form id="dataForm">
+            <input type="hidden" id="editId">
+
+            <div class="row">
+                <label>Student Name *</label>
+                <input type="text" id="studentName" required>
+            </div>
+
+            <div class="row">
+                <label>Roll Number *</label>
+                <input type="text" id="studentRoll" required>
+            </div>
+
+            <div class="row">
+                <label>CGPA (0 – 10) *</label>
+                <input type="number" id="studentCGPA" step="0.1" min="0" max="10" required>
+            </div>
+
+            <div class="row">
+                <label>Course</label>
+                <input type="text" id="studentCourse">
+            </div>
+
+            <div class="btns">
+                <button class="btn-add" id="addBtn">Add</button>
+                <button type="button" class="btn-update" id="saveBtn" style="display:none;">Save</button>
+                <button type="button" class="btn-cancel" id="cancelBtn" style="display:none;">Cancel</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Stats -->
+    <div class="summary">
+        <div>
+            <span id="count">0</span>
+            <p>Total Students</p>
+        </div>
+        <div>
+            <span id="average">0.00</span>
+            <p>Average CGPA</p>
+        </div>
+        <div>
+            <span id="highest">0.00</span>
+            <p>Highest CGPA</p>
+        </div>
+    </div>
+
+    <!-- Tools -->
+    <div class="tools">
+        <input type="text" id="searchBox" placeholder="Search name or roll...">
+        <button onclick="sortName()">Sort Name</button>
+        <button onclick="sortCGPA()">Sort CGPA</button>
+        <button onclick="markTop()">Highlight Top</button>
+        <button class="btn-danger" onclick="removeAll()">Delete All</button>
+    </div>
+
+    <!-- Table -->
+    <table>
+        <thead>
+            <tr>
+                <th>Roll</th>
+                <th>Name</th>
+                <th>Course</th>
+                <th>CGPA</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="tableData"></tbody>
+    </table>
+
+</div>
+
+<script>
+    // Student constructor
+    function Student(id, name, roll, cgpa, course) {
+        this.id = id;
+        this.name = name;
+        this.roll = roll;
+        this.cgpa = parseFloat(cgpa);
+        this.course = course;
+    }
+
+    let records = [];
+    let idCounter = 1;
+    let editMode = false;
+    let visibleList = [];
+
+    function showAlert(msg, type = "info") {
+        const box = document.getElementById("alertBox");
+        box.className = "notice " + type;
+        box.innerText = msg;
+    }
+
+    function refreshStats() {
+        document.getElementById("count").innerText = records.length;
+
+        if (records.length === 0) {
+            document.getElementById("average").innerText = "0.00";
+            document.getElementById("highest").innerText = "0.00";
+            return;
+        }
+
+        const total = records.reduce((sum, s) => sum + s.cgpa, 0);
+        document.getElementById("average").innerText = (total / records.length).toFixed(2);
+        document.getElementById("highest").innerText =
+            Math.max(...records.map(s => s.cgpa)).toFixed(2);
+    }
+
+    function renderTable(list = records) {
+        const body = document.getElementById("tableData");
+        body.innerHTML = "";
+        visibleList = list;
+
+        if (list.length === 0) {
+            body.innerHTML = `<tr><td colspan="5" style="text-align:center;">No records found</td></tr>`;
+            return;
+        }
+
+        list.forEach(s => {
+            body.innerHTML += `
+                <tr>
+                    <td>${s.roll}</td>
+                    <td>${s.name}</td>
+                    <td>${s.course || "-"}</td>
+                    <td>${s.cgpa.toFixed(2)}</td>
+                    <td>
+                        <button onclick="editEntry(${s.id})">Edit</button>
+                        <button class="btn-danger" onclick="deleteEntry(${s.id})">Delete</button>
+                    </td>
+                </tr>
+            `;
+        });
+    }
+
+    function addRecord(student) {
+        if (records.some(s => s.roll === student.roll)) {
+            showAlert("Roll number already exists!", "error");
+            return;
+        }
+        records.push(student);
+        renderTable();
+        refreshStats();
+        showAlert("Student added successfully", "success");
+    }
+
+    function deleteEntry(id) {
+        records = records.filter(s => s.id !== id);
+        renderTable();
+        refreshStats();
+        showAlert("Student deleted", "success");
+    }
+
+    function editEntry(id) {
+        const s = records.find(x => x.id === id);
+        document.getElementById("editId").value = s.id;
+        studentName.value = s.name;
+        studentRoll.value = s.roll;
+        studentCGPA.value = s.cgpa;
+        studentCourse.value = s.course;
+
+        addBtn.style.display = "none";
+        saveBtn.style.display = "inline-block";
+        cancelBtn.style.display = "inline-block";
+        editMode = true;
+    }
+
+    function sortName() {
+        renderTable([...records].sort((a, b) => a.name.localeCompare(b.name)));
+    }
+
+    function sortCGPA() {
+        renderTable([...records].sort((a, b) => b.cgpa - a.cgpa));
+    }
+
+    function markTop() {
+        const max = Math.max(...records.map(s => s.cgpa));
+        const rows = document.querySelectorAll("#tableData tr");
+
+        rows.forEach((row, i) => {
+            row.classList.toggle("topper", visibleList[i]?.cgpa === max);
+        });
+    }
+
+    function removeAll() {
+        if (confirm("Delete all records?")) {
+            records = [];
+            renderTable();
+            refreshStats();
+            showAlert("All records removed", "success");
+        }
+    }
+
+    dataForm.addEventListener("submit", e => {
+        e.preventDefault();
+
+        const student = new Student(
+            editId.value || idCounter++,
+            studentName.value.trim(),
+            studentRoll.value.trim(),
+            studentCGPA.value,
+            studentCourse.value.trim()
+        );
+
+        if (editMode) {
+            records = records.map(s => s.id == student.id ? student : s);
+            editMode = false;
+            showAlert("Record updated", "success");
+        } else {
+            addRecord(student);
+        }
+
+        dataForm.reset();
+        addBtn.style.display = "inline-block";
+        saveBtn.style.display = "none";
+        cancelBtn.style.display = "none";
+
+        renderTable();
+        refreshStats();
+    });
+
+    searchBox.addEventListener("input", () => {
+        const q = searchBox.value.toLowerCase();
+        renderTable(records.filter(s =>
+            s.name.toLowerCase().includes(q) ||
+            s.roll.toLowerCase().includes(q)
+        ));
+    });
+
+    cancelBtn.onclick = () => {
+        dataForm.reset();
+        editMode = false;
+        addBtn.style.display = "inline-block";
+        saveBtn.style.display = "none";
+        cancelBtn.style.display = "none";
+    };
+
+    renderTable();
+    refreshStats();
+</script>
+
+</body>
+</html>
